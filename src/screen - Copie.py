@@ -1,4 +1,4 @@
-import pyscreenshot 
+from PIL import ImageGrab
 import flask
 from io import BytesIO
 
@@ -8,7 +8,7 @@ app = flask.Flask(__name__)
 @app.route('/screen.png')
 def serve_pil_image():
     img_buffer = BytesIO()
-    pyscreenshot.grab().save(img_buffer, 'PNG', quality=200 , bbox=(10, 10, 510, 510))
+    ImageGrab.grab().save(img_buffer, 'PNG', quality=200 , bbox=(10, 10, 510, 510))
     img_buffer.seek(0)
     return flask.send_file(img_buffer, mimetype='image/png')
 
